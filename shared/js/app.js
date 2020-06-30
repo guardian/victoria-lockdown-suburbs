@@ -100,9 +100,9 @@ export class App {
 		    .append("path")
 		        .attr("fill", function(d){
 		        	console.log(+d.properties.postcode)
-		        	return contains(infected, +d.properties.postcode) ? "red" : "lightblue" ;
+		        	return contains(infected, +d.properties.postcode) ? "red" : "#eaeaea" ;
 		        })
-		        .attr("stroke", "#bcbcbc")
+		        .attr("stroke", "#fff")
 		        .attr("d", path)
 				.on("mouseover", function(d) {
 
