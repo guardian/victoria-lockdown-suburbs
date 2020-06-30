@@ -9,7 +9,7 @@ import tooltipHtml from 'shared/js/tooltip.html'
 
 export class App {
 
-	constructor(suburbs) {
+	constructor(suburbs, places) {
 
 		var self = this
 
@@ -18,6 +18,8 @@ export class App {
 		this.ratio = 40
 
 		this.suburbs = suburbs
+
+		this.places = places
 
 		this.activate()
 		
@@ -62,6 +64,8 @@ export class App {
 		var self = this
 
 		var container = d3.select("#coronaMapContainer")
+
+		var filterPlaces = self.places.filter( (d) => d.city === "Melbourne");
 		
 		var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
@@ -96,7 +100,7 @@ export class App {
 		    .append("path")
 		        .attr("fill", function(d){
 		        	console.log(+d.properties.postcode)
-		        	return contains(infected, +d.properties.postcode) ? "red" : "blue" ;
+		        	return contains(infected, +d.properties.postcode) ? "red" : "lightblue" ;
 		        })
 		        .attr("stroke", "#bcbcbc")
 		        .attr("d", path)
@@ -114,7 +118,14 @@ export class App {
 				})
 				.on("mouseout", (d) => self.tooltip.transition().duration(500).style("opacity", 0))
 
+		var labels = svg.selectAll("text").data(filterPlaces)
 
+		labels.enter()
+			.append("text")
+			.text((d) => d.name)
+			.attr("x", (d) => projection([d.longitude, d.latitude])[0])
+			.attr("y", (d) => projection([d.longitude, d.latitude])[1])
+			.attr("class","label")
 
 
 	}
