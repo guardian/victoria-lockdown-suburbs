@@ -2,8 +2,6 @@ var el = document.createElement('script');
 el.src = '<%= atomPath %>/app.js';
 document.body.appendChild(el);
 
-
-
 setTimeout(() => {
   if (window.resize) {  
     const html = document.querySelector('html')
@@ -21,6 +19,10 @@ setTimeout(() => {
   }
 },100)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3f167c018310128b878222cbf3aa08771d45c47
 function onElementHeightChange(elm, callback) {
     var lastHeight = elm.clientHeight, newHeight;
     (function run(){
